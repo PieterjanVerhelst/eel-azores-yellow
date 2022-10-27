@@ -21,7 +21,6 @@ eel$animal_project_code <- NULL
 eel$scientific_name <- NULL
 eel$age <- NULL
 eel$age_unit <- NULL
-eel$life_stage <- NULL
 eel$acoustic_tag_id <- factor(eel$acoustic_tag_id)
 eel$acoustic_tag_id <- gsub("R64K", "A69-1303", eel$acoustic_tag_id)   # Set consistent prefix for tag protocol
 eel$capture_date_time  <- as_datetime(eel$capture_date_time)
