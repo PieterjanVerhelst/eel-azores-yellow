@@ -25,9 +25,8 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	* obtain detection dataset `raw_detection_data.csv`
 	* obtain meta-data on tagged eels `flores_eels_meta_data.csv`
 	* obtain meta-data on deployments `deployments.csv` (station names and positions)
-2. `attach_release.R`: Add eel release positions and date-time to detection dataset
-3. `merge_eel_characteristics.R`: Add eel meta data to the detection dataset
-4. `remove_false.R`: Remove false detections from dataset
-5. `create_interactive_maps.R`: Create interactive html widget maps per year of tagging
-6. `create_facet_plots.R`: Create plots with facets per year of tracking and over different weeks
+2. `merge_eel_characteristics.R`: Add eel meta data to the detection dataset
+3. `remove_false.R`: Remove false detections from dataset
+4. `create_interactive_maps.R`: Create interactive html widget maps per year of tagging
+5. `create_facet_plots.R`: Create plots with facets per year of tracking and over different weeks
 
