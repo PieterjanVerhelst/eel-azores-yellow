@@ -92,4 +92,59 @@ title(xlab="Transmitter ID", line = 6, cex.lab=1)
 
 
 
+# 4. Create abacus plot ####
+
+data_det <- data
+data_an <- eel
+
+
+# Colour settings
+col_stationgroup <- c(
+  "148 FLO CRUZ" = "#FF3300",
+  "149 FLO CRUZ" = "#FF9900",
+  "151 FLO CRUZ" = "#CC9933",
+  "152 FLO CRUZ" = "#33FF00",
+  "154 FLO CRUZ" = "#99FFFF",
+  "155 FLO CRUZ" = "#0000FF",
+  "156 FLO CRUZ" = "#6633CC"
+)
+
+levels_animal_id <- unique(data_an$acoustic_tag_id[order(data_an$release_date_time, decreasing = T)])
+
+data_an <- data_an %>% 
+  mutate(acoustic_tag_id = factor(acoustic_tag_id, levels = levels_animal_id)) %>% 
+  arrange(acoustic_tag_id)
+data_det <- data_det %>% 
+  mutate(acoustic_tag_id = factor(acoustic_tag_id, levels = levels_animal_id)) %>% 
+  arrange(acoustic_tag_id)
+
+shape_det <- 15
+size_det <- 1
+shape_release <- 23
+size_release <- 1.5
+
+
+abacus_plot <- ggplot() +
+  theme_bw() +
+  theme(panel.background = element_rect(fill = 'gray98'),
+        axis.ticks.y=element_blank(),
+        axis.text.x=element_text(hjust=0, size = 12),
+        axis.title = element_blank(),
+        legend.position = 'none',
+        axis.text.y = element_blank()) +
+  geom_point(data = data_an, 
+             aes(release_date_time, acoustic_tag_id, fill = release_location), size = 0.1) +
+  geom_point(data = data_det, 
+             aes(date_time, acoustic_tag_id, colour = station_name), 
+             shape = shape_det, size = size_det) +
+  geom_point(data = data_an, 
+             aes(release_date_time, acoustic_tag_id, fill = release_location),
+             shape = shape_release, size = size_release) +
+  scale_fill_manual(values = col_stationgroup) +
+  scale_colour_manual(values = col_stationgroup) 
+
+abacus_plot
+
+
+
   
