@@ -10,4 +10,11 @@ unique(data$station_name)
 data <- data[!(data$acoustic_project_code == "MOBEIA"),]
 data <- data[!(data$acoustic_project_code == "Walloneel"),]
 data <- data[!(data$acoustic_project_code == "FISHINTEL"),]
-
+data <- data[!(data$acoustic_project_code == "ws1"),]
+data <- data[!(data$acoustic_project_code == "FISP"),]
+data <- data[!(data$acoustic_project_code == "Danish_Straits"),]
+data <- data[!(data$acoustic_project_code == "BTN-IMEDEA"),]
+data <- data[!(data$acoustic_project_code == "FISHOWF"),]
+data <- data[!(data$acoustic_project_code == "FISHINTEL"),]
+data <- data[!(data$acoustic_project_code == "GTN"),]
+data <- data[!(data$acoustic_project_code == "PTN/ATLAZUL"),]
