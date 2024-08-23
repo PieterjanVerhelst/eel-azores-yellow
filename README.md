@@ -5,7 +5,7 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 
 ### Data
 
-<mark>Data last updated on 27/10/2022</mark>
+<mark>Data last updated on 23/08/2024</mark>
 
 * `/raw:`
 	+ `raw_detection_data.csv`: dataset containing the raw detection data obtained from the ETN database
@@ -16,6 +16,7 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	+ `receivernetwork_cruz.csv`: network of receivers with detections in the River Cruz
 
 * `/external:`
+	+ `distancematrix_cruz.csv`: matrix with the river distances between detection stations
 
 
 ### Scripts
@@ -28,9 +29,17 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	* obtain meta-data on deployments `deployments.csv` (station names and positions)
 2. `merge_eel_characteristics.R`: Add eel meta data to the detection dataset
 3. `remove_false.R`: Remove false detections from dataset
-4. `extract_network.R`: Extract receiver networks based on detection data
+4. `explore_data.R`: Plot number of eels per station, number of stations per eel and tracking time
+5. `extract_network.R`: Extract receiver networks based on detection data
 	* This serves as input to calculate the distance matrices at https://github.com/inbo/fish-tracking
-5. `explore_data.R`: Plot number of eels per station, number of stations per eel and tracking time
+6. `smooth_eel_tracks.R`: Smooths duplicates and calculates residencies per eel per station. Therefore, it calls the following two functions:
+	+ 6a. `get_nearest_stations.R`: general function to extract the smoothed track for one eel (via its `transmitter ID`)
+	+ 6b. `get_timeline.R`: function to get the stations which are near a given station (where near means that the distance is smaller than a certain given limit, e.g. detection range).
+		- --> Generate residency datasets per project and store them in `/interim/residencies`
+
+
+
+
 
 
 
