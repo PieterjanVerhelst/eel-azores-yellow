@@ -13,6 +13,7 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	+ `deployments.csv`: dataset containing the station names and positions of the receivers from ETN
 
 * `/interim:`
+	+ `receivernetwork_cruz.csv`: network of receivers with detections in the River Cruz
 
 * `/external:`
 
@@ -27,7 +28,9 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	* obtain meta-data on deployments `deployments.csv` (station names and positions)
 2. `merge_eel_characteristics.R`: Add eel meta data to the detection dataset
 3. `remove_false.R`: Remove false detections from dataset
-4. `explore_data.R`: Plot number of eels per station, number of stations per eel and tracking time
+4. `extract_network.R`: Extract receiver networks based on detection data
+	* This serves as input to calculate the distance matrices at https://github.com/inbo/fish-tracking
+5. `explore_data.R`: Plot number of eels per station, number of stations per eel and tracking time
 
 
 
