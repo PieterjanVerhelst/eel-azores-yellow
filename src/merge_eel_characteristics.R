@@ -6,15 +6,10 @@ library(tidyverse)
 library(lubridate)
 
 
-# 1. Load detection data ####
-data <- read_csv("./data/raw/raw_detection_data.csv")
-data$...1 <- NULL
-
-# Set consistent prefix for tag protocol
-data$acoustic_tag_id <- gsub("R64K", "A69-1303", data$acoustic_tag_id)
+source("./src/attach_release.R")
 
 
-# 2. Load eel metadata ####
+# 1. Load eel metadata ####
 eel <- read.csv("./data/raw/flores_eels_meta_data.csv")
 eel$X <- NULL
 eel$animal_project_code <- NULL
@@ -34,7 +29,7 @@ eel %>%
   summarise(tot_eels = n_distinct(acoustic_tag_id))
 
 
-# 3. Merge eel characteristics with dataset ####
+# 2. Merge eel characteristics with dataset ####
 data <- merge(data, eel, by="acoustic_tag_id")
 
 

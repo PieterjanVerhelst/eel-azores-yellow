@@ -17,7 +17,10 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	+ `residency.csv`: dataset with detections binned per station within a specific time (1h) and distance (100 m) threshold, calculated via the `smooth_eel_tracks.R` code
 
 * `/external:`
+	+ `release_locations_stations.csv`: file with the release locations and the abbreviated release station names.
 	+ `distancematrix_cruz.csv`: matrix with the river distances between detection stations
+	+ `station_order.csv`: file containing the stations upstream the release location. This file is needed in `calculate_speed.R`
+
 
 
 ### Scripts
@@ -28,18 +31,19 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	* obtain detection dataset `raw_detection_data.csv`
 	* obtain meta-data on tagged eels `flores_eels_meta_data.csv`
 	* obtain meta-data on deployments `deployments.csv` (station names and positions)
-2. `merge_eel_characteristics.R`: Add eel meta data to the detection dataset
-3. `remove_false.R`: Remove false detections from dataset
-4. `explore_data.R`: Plot number of eels per station, number of stations per eel and tracking time
-5. `extract_network.R`: Extract receiver networks based on detection data
+2. `attach_release.R`: Add eel release positions and date-time to detection dataset
+3. `merge_eel_characteristics.R`: Add eel meta data to the detection dataset
+4. `remove_false.R`: Remove false detections from dataset
+5. `explore_data.R`: Plot number of eels per station, number of stations per eel and tracking time
+6. `extract_network.R`: Extract receiver networks based on detection data
 	* This serves as input to calculate the distance matrices at https://github.com/inbo/fish-tracking
-6. `smooth_eel_tracks.R`: Smooths duplicates and calculates residencies per eel per station. Therefore, it calls the following two functions:
-	+ 6a. `get_nearest_stations.R`: general function to extract the smoothed track for one eel (via its `transmitter ID`)
-	+ 6b. `get_timeline.R`: function to get the stations which are near a given station (where near means that the distance is smaller than a certain given limit, e.g. detection range).
+7. `smooth_eel_tracks.R`: Smooths duplicates and calculates residencies per eel per station. Therefore, it calls the following two functions:
+	+ 7a. `get_nearest_stations.R`: general function to extract the smoothed track for one eel (via its `transmitter ID`)
+	+ 7b. `get_timeline.R`: function to get the stations which are near a given station (where near means that the distance is smaller than a certain given limit, e.g. detection range).
 		- --> Generate residency datasets per project and store them in `/interim/residencies`
-7. `calculate_speed.R`: Calculate movement speeds between consecutive detection stations. Also calculates swim distance, swim time, cumulative swim distance and station distance from source station.
-	+ 7a. `calculate_speed_function.R`: function to calculate speed between consecutive displacements; based on a function in Hugo Flavio's `actel` package
-	+ 7b. `calculate_sourcedistance_function.R`: function to calculate the station distance from a 'source' station; based on a function in Hugo Flavio's `actel` package
+8. `calculate_speed.R`: Calculate movement speeds between consecutive detection stations. Also calculates swim distance, swim time, cumulative swim distance and station distance from source station.
+	+ 8a. `calculate_speed_function.R`: function to calculate speed between consecutive displacements; based on a function in Hugo Flavio's `actel` package
+	+ 8b. `calculate_sourcedistance_function.R`: function to calculate the station distance from a 'source' station; based on a function in Hugo Flavio's `actel` package
 		- --> Generate speed datasets per project and store them in `/interim/speed`
 
 

@@ -7,9 +7,18 @@
 library(tidyverse)
 library(lubridate)
 
+# 1. Load detection data ####
+data <- read_csv("./data/raw/raw_detection_data.csv")
+data$...1 <- NULL
+data$scientific_name <- NULL
+data$acoustic_project_code <- NULL
 
-# 1. Read eel meta data
-eel <- read_csv("./data/interim/eel_meta_data.csv")
+# Set consistent prefix for tag protocol
+data$acoustic_tag_id <- gsub("R64K", "A69-1303", data$acoustic_tag_id)
+
+# 2. Read eel meta data ####
+eel <- read_csv("./data/raw/flores_eels_meta_data.csv")
+eel$acoustic_tag_id <- gsub("R64K", "A69-1303", eel$acoustic_tag_id)
 
 eel <- select(eel, 
               animal_project_code, 
@@ -22,13 +31,13 @@ eel <- select(eel,
 eel$release_location <- factor(eel$release_location)
 
 
-# 2. Read file with release location and station
+# 3. Read file with release location and station
 release <- read_csv("./data/external/release_locations_stations.csv")
 
 release$release_location <- factor(release$release_location)
 release$release_station <- factor(release$release_station)
 
-# 3. Merge release station with eel data
+# 4. Merge release station with eel data
 eel <- left_join(eel, release, by = "release_location")
 
 summary(eel$release_station)  # May not contain any NAs!
@@ -57,8 +66,7 @@ eel <- rename(eel,
 data <- rbind(data, eel)
 
 
-# 7. Write csv file  
-write.csv(data, "./data/interim/detection_data.csv")
+
 
 
 
