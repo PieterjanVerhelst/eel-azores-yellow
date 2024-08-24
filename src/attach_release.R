@@ -11,7 +11,7 @@ library(lubridate)
 data <- read_csv("./data/raw/raw_detection_data.csv")
 data$...1 <- NULL
 data$scientific_name <- NULL
-data$acoustic_project_code <- NULL
+
 
 # Set consistent prefix for tag protocol
 data$acoustic_tag_id <- gsub("R64K", "A69-1303", data$acoustic_tag_id)
@@ -44,6 +44,7 @@ summary(eel$release_station)  # May not contain any NAs!
 
 
 # 5. Process eel dataset column names
+eel$acoustic_project_code <- "AZO"
 eel$receiver_id <- "none"
 
 eel <- select(eel,
@@ -51,6 +52,7 @@ eel <- select(eel,
               release_date_time, 
               acoustic_tag_id, 
               release_station,
+              acoustic_project_code,
               receiver_id,
               release_latitude, 
               release_longitude)
