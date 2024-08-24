@@ -14,29 +14,12 @@ library(actel)
 # Source functions
 source("./src/calculate_speed_function.R")
 source("./src/calculate_sourcedistance_function.R")
-source("./src/clean_residency_data_functions.R")
 
 # Read residency dataset per animal project
-animal_project_id <- "2011_loire"
-residency <- read_csv(
-  sprintf("./data/interim/residencies/residency_%s.csv", animal_project_id)
-)
+residency <- read_csv("./data/interim/residency.csv")
 residency$...1 <- NULL
 residency$acoustic_tag_id <- factor(residency$acoustic_tag_id)
 
-# Clean residency data according to 'animal_project_code'
-# projects:
-# 2011_warnow
-# 2013_albertkanaal
-# esgl
-# nedap_meuse
-# 2015_phd_verhelst_eel
-# 2004_gudena
-# 2012_leopoldkanaal
-# noordzeekanaal
-# !IMPORTANT!
-# When 'Error: Invalid value for `animal_project_code`.', it means that the animal_project_id is not in the residency dataset and does not require cleaning. Hence, the error can be ignored and running script can continue.
-residency <- clean_df(residency, animal_project_id)
 
 # Chronologically arrange dataset
 residency <- residency %>% arrange(acoustic_tag_id, arrival)
@@ -45,8 +28,7 @@ residency <- residency %>% arrange(acoustic_tag_id, arrival)
 # Load distance matrix
 # Make sure the first column is not containing the station names
 distance_matrix <- read.csv(
-  sprintf("./data/external/distance_matrices/distancematrix_%s.csv",
-          animal_project_id),
+  sprintf("./data/external/distancematrix_cruz.csv"),
   row.names = 1, 
   check.names=FALSE
 )
