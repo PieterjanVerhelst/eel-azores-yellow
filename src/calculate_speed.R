@@ -73,7 +73,7 @@ upstream_stations_tidy <- upstream_stations %>%
 
 # check upstream stations are in distance matrix
 upstream_stations_vect <- upstream_stations_tidy %>%
-  filter(animal_project_code == animal_project_id) %>%
+  #filter(animal_project_code == animal_project_id) %>%
   distinct(upstream_stations) %>%
   pull(upstream_stations)
 
@@ -123,4 +123,4 @@ speed <- speed %>%
                      
 
 # Write csv
-write.csv(speed, sprintf("./data/interim/speed/speed_%s.csv",animal_project_id))
+write.csv(speed, sprintf("./data/interim/speed.csv"))
