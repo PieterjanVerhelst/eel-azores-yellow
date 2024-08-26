@@ -10,9 +10,7 @@ library(tidyquant)
 # Upload dataset
 data <- read_csv('./data/interim/speed.csv') 
 data$...1 <- NULL
-data$...2 <- NULL
 data$acoustic_tag_id <- factor(data$acoustic_tag_id)
-data$migration <- factor(data$migration)
 data$station_name <- factor(data$station_name)
 
 
@@ -33,10 +31,6 @@ max(data$distance_to_source_m)  # Identify the max limit for the y-axis
 #  select(-distance_to_source_m) %>%
 #  distinct()
 
-#migrants <- filter(migrants, total_distance > 4000)
-
-#data<- subset(data, acoustic_tag_id %in% migrants$acoustic_tag_id)
-#data$acoustic_tag_id <- factor(data$acoustic_tag_id)
 
 
 # Create pdf with distance tracks
@@ -51,18 +45,15 @@ for (i in 1:length(mydfnew.split.eel)){ #i van 1 tot aantal transmitters
   g <- g + theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
                  panel.background = element_blank(), axis.line = element_line(colour = "black"))
   g <- g + geom_line(aes(arrival, -1*distance_to_source_m), data = mydfnew.temp, colour = "black", linewidth = 1)
-  g <- g + geom_point(aes(arrival, -1*distance_to_source_m, colour = migration), data = mydfnew.temp, shape = 16, size = 5)
-  g <- g + scale_color_manual(values = c("FALSE" = "red",
-                                         "TRUE" =  "green"))
+  g <- g + geom_point(aes(arrival, -1*distance_to_source_m), data = mydfnew.temp, shape = 16, size = 5)
   g <- g + theme(plot.title = element_text(lineheight=.8, face="bold", size=20))
   #g <- g + scale_y_continuous(limit = c(-240000, 15000),breaks = c(-240000, -220000, -200000, -180000, -160000, -140000,-135000,-130000,-125000,-120000,-115000,-110000,-105000,-100000,-95000,-90000,-85000, -80000, -75000, -70000, -65000, -60000, -55000, -50000, -45000, -40000, -35000, -30000, -25000, -20000, -15000, -10000, -5000, 0, 5000, 10000, 15000), labels = c(-240, -220, -200, -180, -160, -140,-135,-130,-125,-120,-115,-110,-105,-100,-95,-90,-85,-80,-75,-70,-65,-60,-55,-50,-45,-40,-35,-30,-25,-20,-15,-10,-5,0,5,10,15))
-  g <- g + labs(title = mydfnew.temp$acoustic_tag_id, subtitle = mydfnew.temp$catch_year) 
+  g <- g + labs(title = mydfnew.temp$acoustic_tag_id) 
   g <- g + ylab("Distance (m)")
   g <- g + xlab("Date")
-  g <- g + scale_x_datetime(date_breaks  ="1 week")
+  g <- g + scale_x_datetime(date_breaks  ="1 month")
   g <- g + geom_hline(yintercept = -1*mydfnew.temp$distance_to_source_m, colour = "gray", size = 0.5, linetype = "dashed")
   g <- g + annotate("text",x = mydfnew.temp$arrival[1]- (240*60*60), y = -1*mydfnew.temp$distance_to_source_m, label = mydfnew.temp$station_name, hjust=0, colour="red", size = 3)
-  g <- g + theme(legend.position="bottom")
   print(g)
 }
 
