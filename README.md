@@ -46,9 +46,13 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 	+ 8a. `calculate_speed_function.R`: function to calculate speed between consecutive displacements; based on a function in Hugo Flavio's `actel` package
 	+ 8b. `calculate_sourcedistance_function.R`: function to calculate the station distance from a 'source' station; based on a function in Hugo Flavio's `actel` package
 		- --> Generate speed datasets per project and store them in `/interim/speed`
+9. `create_distance_plot.R`: Create plots with travelled distance per eel and store as .pdf
 
 
+### Figures
 
+* `/figures:`
+	+ `/distance_tracks.pdf`: pdf-file with traveled distances per eel
 
 
 
