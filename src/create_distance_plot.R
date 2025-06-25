@@ -67,16 +67,14 @@ dev.off()
 ## Create single plot
 
 # Select individual
-data2 <- data[which(data$acoustic_tag_id == "A69-1601-52628"), ]
+data2 <- data[which(data$acoustic_tag_id == "A69-1303-2699"), ]
 #data2=data2[order(as.POSIXct(strptime(data2$Arrival,"%d/%m/%Y %H:%M"))),]
 data2 <- data2[order(as.POSIXct(strptime(data2$arrival,"%Y-%m-%d %H:%M:%S"))),]
 
 
 # Create plot
 ggplot() + geom_line(aes(arrival, -1*distance_to_source_m/1000), data = data2, colour = "black", size = 1) + 
-  geom_point(aes(arrival, -1*distance_to_source_m/1000, colour = migration), data = data2, shape = 16, size = 5) +
-  scale_color_manual(values = c("FALSE" = "red",
-                                "TRUE" =  "green")) +
+  geom_point(aes(arrival, -1*distance_to_source_m/1000), data = data2, shape = 16, size = 5) +
   ggtitle(data2$acoustic_tag_id) +
   theme(plot.title = element_text(lineheight=.8, face="bold", size=20)) +
   ylab("Distance (km)") +
