@@ -94,7 +94,16 @@ title(xlab="Transmitter ID", line = 6, cex.lab=1)
 
 # 4. Create abacus plot ####
 
-data_det <- data
+data_det <- filter(data, station_name != "rel_cruz1" ,
+                     station_name != "rel_cruz2",
+                   station_name != "rel_cruz3",
+                   station_name != "rel_cruz4",
+                   station_name != "rel_cruz5",
+                   station_name != "rel_cruz6",
+                   station_name != "rel_cruz7",
+                   station_name != "rel_cruz8",
+                   station_name != "rel_cruz9",
+                   station_name != "rel_cruz10")
 data_an <- eel
 
 
@@ -141,9 +150,59 @@ abacus_plot <- ggplot() +
              aes(release_date_time, acoustic_tag_id, fill = release_location),
              shape = shape_release, size = size_release) +
   scale_fill_manual(values = col_stationgroup) +
-  scale_colour_manual(values = col_stationgroup) 
+  scale_colour_manual(values = col_stationgroup) +
+  scale_x_datetime(date_labels = "%m-%Y", date_breaks = "1 month")
 
 abacus_plot
+
+
+
+# Alternative abacus plot construction
+label_zone <- c("146 FLO CRUZ" = "146 FLO CRUZ",
+                "148 FLO CRUZ" = "148 FLO CRUZ",
+                "149 FLO CRUZ" = "149 FLO CRUZ",
+                "151 FLO CRUZ" = "151 FLO CRUZ",
+                "152 FLO CRUZ" = "152 FLO CRUZ",
+                "154 FLO CRUZ" = "154 FLO CRUZ",
+                "155 FLO CRUZ" = "155 FLO CRUZ",
+                "156 FLO CRUZ" = "156 FLO CRUZ")
+
+cols_zone <- c("146 FLO CRUZ" = "purple", 
+               "148 FLO CRUZ" = "darkgreen",
+               "149 FLO CRUZ" = "blue",
+               "151 FLO CRUZ" = "pink",
+               "152 FLO CRUZ" = "yellow",
+               "154 FLO CRUZ" = "brown",
+               "155 FLO CRUZ" = "orange",
+               "156 FLO CRUZ" = "red")
+
+
+ggplot() +
+  geom_point(data = data_det, 
+             aes(date_time, acoustic_tag_id, col = station_name),
+             shape = 15, size = 2.5) +
+  geom_point(data = data_an, 
+             aes(release_date_time, acoustic_tag_id),
+             shape = 23, size = 3.5, fill = 'grey') +
+  #geom_path(size = 1.5) +
+  #facet_grid(rows = vars(sex), scales = "free_y", space = "free", switch = "y") +
+  labs(y = "Transmitter ID", x = "") +
+  theme_bw() +
+  theme(axis.text.y = element_text(size = 18, vjust = 0.5),
+        axis.title.y = element_text(size = 18),
+        legend.position = "top",
+        axis.line = element_line(),
+        axis.ticks.x = element_line(),
+        axis.ticks.y = element_blank(),
+        strip.text.y = element_text(size = 18), 
+        axis.text.x = element_text(size = 18, angle = 45, vjust = 0.5), 
+        legend.text = element_text(size = 18),
+        legend.title = element_text(size = 18),
+        panel.grid = element_blank(),
+        plot.margin = margin(t = 0.1, r = 1, unit = "cm"),
+        strip.background = element_rect(color = "black", fill = "light grey")) +
+  scale_x_datetime(date_labels = "%m-%Y", date_breaks = "1 month") +
+  scale_colour_manual("Station name:", labels = label_zone, values = cols_zone)
 
 
 
