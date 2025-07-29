@@ -15,7 +15,9 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 * `/interim:`
 	+ `receivernetwork_cruz.csv`: network of receivers with detections in the River Cruz
 	+ `residency.csv`: dataset with detections binned per station within a specific time (1h) and distance (100 m) threshold, calculated via the `smooth_eel_tracks.R` code
+	+ `residency_false_removed.csv`: false detections removed of residency data set
 	+ `speed.csv`: datas with the swim speeds between detection stations, calculated via the `calculate_speed.R` code
+	+ `speed_false_removed.csv`: false detections removed of speed data set
 
 * `/external:`
 	+ `release_locations_stations.csv`: file with the release locations and the abbreviated release station names.
