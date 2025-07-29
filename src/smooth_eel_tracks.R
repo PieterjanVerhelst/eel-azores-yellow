@@ -133,5 +133,5 @@ residency <- residency[, c("animal_project_code", "acoustic_tag_id","station_nam
 
 
 # Write csv
-write.csv(residency, "./data/interim/residency.csv")
+write.csv(residency, "./data/interim/residency_false_removed.csv")
 

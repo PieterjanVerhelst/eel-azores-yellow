@@ -123,4 +123,4 @@ speed <- speed %>%
                      
 
 # Write csv
-write.csv(speed, sprintf("./data/interim/speed.csv"))
+write.csv(speed, sprintf("./data/interim/speed_false_removed.csv"))
