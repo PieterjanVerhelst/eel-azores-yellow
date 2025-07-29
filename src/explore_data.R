@@ -176,7 +176,11 @@ cols_zone <- c("146 FLO CRUZ" = "purple",
                "155 FLO CRUZ" = "orange",
                "156 FLO CRUZ" = "red")
 
+# Remove silver eel
+data_det <- filter(data_det, acoustic_tag_id != "A69-1303-2711")
 
+
+# Create abacus plot
 ggplot() +
   geom_point(data = data_det, 
              aes(date_time, acoustic_tag_id, col = station_name),

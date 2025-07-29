@@ -56,6 +56,7 @@ Analysis of tracking study on yellow eels at Flores, Azores.
 * `/figures:`
 	+ `/distance_tracks.pdf`: pdf-file with traveled distances per eel
 	+ `/distance_tracks_false_removed.pdf`: false detections removed of pdf-file with traveled distances per eel
+	+ `abacus.png`: abacus plot with eel detections; silver eel is removed
 
 
 
