@@ -158,26 +158,41 @@ abacus_plot
 
 
 # Alternative abacus plot construction
-label_zone <- c("146 FLO CRUZ" = "146 FLO CRUZ",
-                "148 FLO CRUZ" = "148 FLO CRUZ",
-                "149 FLO CRUZ" = "149 FLO CRUZ",
-                "151 FLO CRUZ" = "151 FLO CRUZ",
-                "152 FLO CRUZ" = "152 FLO CRUZ",
-                "154 FLO CRUZ" = "154 FLO CRUZ",
-                "155 FLO CRUZ" = "155 FLO CRUZ",
-                "156 FLO CRUZ" = "156 FLO CRUZ")
-
-cols_zone <- c("146 FLO CRUZ" = "purple", 
-               "148 FLO CRUZ" = "darkgreen",
-               "149 FLO CRUZ" = "blue",
-               "151 FLO CRUZ" = "pink",
-               "152 FLO CRUZ" = "yellow",
-               "154 FLO CRUZ" = "brown",
-               "155 FLO CRUZ" = "orange",
-               "156 FLO CRUZ" = "red")
-
 # Remove silver eel
 data_det <- filter(data_det, acoustic_tag_id != "A69-1303-2711")
+
+# Rename stations
+data_det$station_name <- recode(data_det$station_name,   
+                                "146 FLO CRUZ" = "146 FLO CRUZ",
+                                "148 FLO CRUZ" = "station 1",
+                                "149 FLO CRUZ" = "station 2",
+                                "151 FLO CRUZ" = "station 4",
+                                "152 FLO CRUZ" = "station 5",
+                                "154 FLO CRUZ" = "station 7",
+                                "155 FLO CRUZ" = "station 10",
+                                "156 FLO CRUZ" = "station 8")
+
+label_zone <- c("146 FLO CRUZ" = "146 FLO CRUZ",
+                "station 1" = "station 1",
+                "station 2" = "station 2",
+                "station 4" = "station 4",
+                "station 5" = "station 5",
+                "station 7" = "station 7",
+                "station 10" = "station 10",
+                "station 8" = "station 8")
+
+cols_zone <- c("146 FLO CRUZ" = "purple", 
+               "station 1" = "darkgreen",
+               "station 2" = "blue",
+               "station 4" = "pink",
+               "station 5" = "yellow",
+               "station 7" = "brown",
+               "station 10" = "orange",
+               "station 8" = "red")
+
+data_det$station_name <- factor(data_det$station_name,
+                                ordered = TRUE,
+                                levels = c("station 1", "station 2", "station 4", "station 8", "station 10"))
 
 
 # Create abacus plot
